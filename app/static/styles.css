@@ -1,0 +1,24 @@
+:root {
+  --bg: #0b1021;
+  --card: #121937;
+  --text: #e8ecff;
+  --muted: #9aa7ff;
+  --accent: #6c8cff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: var(--bg); color: var(--text);
+}
+.container { max-width: 900px; margin: 40px auto; padding: 0 16px; }
+h1 { font-size: 28px; margin: 0 0 20px; }
+.panel { background: var(--card); border: 1px solid #1d2550; border-radius: 12px; padding: 16px; margin: 16px 0; }
+.row { display: flex; gap: 8px; align-items: center; }
+textarea, input { width: 100%; background: #0e1540; color: var(--text); border: 1px solid #24306b; border-radius: 8px; padding: 10px; }
+button { background: var(--accent); color: white; border: none; border-radius: 8px; padding: 10px 14px; cursor: pointer; }
+button:hover { filter: brightness(1.1); }
+.status { color: var(--muted); margin-top: 8px; font-size: 14px; }
+.answer { white-space: pre-wrap; background: #0e1540; padding: 12px; border-radius: 8px; margin-top: 12px; }
+.sources { margin-top: 10px; font-size: 14px; color: var(--muted); }
+.sources .src { padding: 8px; background: #0e1540; border: 1px solid #24306b; border-radius: 8px; margin: 6px 0; }
+

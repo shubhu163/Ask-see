@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+
+  app:
+    build: .
+    depends_on:
+      - ollama
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - OLLAMA_MODEL=llama3.2:3b-instruct
+      - CHROMA_DIR=/data/chroma
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma:/data
+    restart: unless-stopped
+
+volumes:
+  ollama:
+  chroma:
+
+

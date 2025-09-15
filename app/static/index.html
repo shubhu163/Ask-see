@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ask & See</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Ask & See</h1>
+      <div class="panel">
+        <h2>Ingest</h2>
+        <textarea id="ingestText" placeholder="Paste text to ingest..." rows="6"></textarea>
+        <div class="row">
+          <input id="source" placeholder="source (optional)" />
+          <input id="title" placeholder="title (optional)" />
+          <button id="ingestBtn">Add to KB</button>
+        </div>
+        <div class="row">
+          <input id="fileInput" type="file" accept=".pdf,.docx,.txt" />
+          <button id="uploadBtn">Upload File</button>
+        </div>
+        <div id="ingestStatus" class="status"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Ask</h2>
+        <div class="row">
+          <input id="question" placeholder="Ask a question..." />
+          <button id="askBtn">Ask</button>
+        </div>
+        <div id="answer" class="answer"></div>
+        <div id="sources" class="sources"></div>
+      </div>
+    </div>
+
+    <script src="/static/main.js"></script>
+  </body>
+  </html>
+
+
