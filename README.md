@@ -1,45 +1,59 @@
-## Polyglot FAQ Chat
+## Ask & See — Explainable RAG Chatbot
 
-End-to-end RAG app using FastAPI + LangChain + Google embeddings + Hugging Face.
+Ask questions, get answers, and see a live 2D/3D map of your knowledge base (Google embeddings + PCA).
 
-### 1) Setup
+### 1) Prereqs
+- Python 3.11
+- Ollama running locally (for generation)
+- A Google API key for `models/text-embedding-004`
+
+### 2) Setup
 ```
 python -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
-cp env.example .env
-# Fill GOOGLE_API_KEY and HUGGINGFACEHUB_API_TOKEN in .env
+export GOOGLE_API_KEY="YOUR_KEY"
+export OLLAMA_BASE_URL="http://127.0.0.1:11434"
+export OLLAMA_MODEL="llama3.2:3b-instruct"
+export CHROMA_DIR=".chroma"
 ```
 
-### 2) Run
+Start Ollama in another terminal and pull a small model:
 ```
-uvicorn app.main:app --reload --port 8000
+ollama serve
+ollama pull llama3.2:3b-instruct
 ```
 
-### 3) Test
+### 3) Build frontend once (served by FastAPI)
 ```
-curl -X POST http://localhost:8000/ingest -H "Content-Type: application/json" -d '[
-  {"text":"FastAPI is a modern web framework for building APIs with Python.", "source":"notes", "title":"fastapi"}
+cd frontend
+npm ci
+npm run build
+rm -rf ../app/static/* && cp -R dist/* ../app/static/
+cd ..
+```
+
+### 4) Run backend
+```
+uvicorn app.main:app --host 0.0.0.0 --port 8000
+```
+Open http://127.0.0.1:8000/ui
+
+### 5) Demo flow
+1. Ingest 2+ snippets (Ingest panel) → Refresh in Embeddings Visualization.
+2. Toggle 2D/3D, hover points for titles/snippets.
+3. Ask questions; answers include cited sources.
+
+### API quick test
+```
+curl -X POST http://127.0.0.1:8000/ingest -H "Content-Type: application/json" -d '[
+  {"text":"RAG combines a vector store and a generator.", "source":"demo", "title":"RAG Basics"}
 ]'
 
-curl -X POST http://localhost:8000/ask -H "Content-Type: application/json" -d '{"question":"FastAPI क्या है?", "k":4}'
+curl -X POST http://127.0.0.1:8000/ask -H "Content-Type: application/json" -d '{"question":"What is RAG?", "k":4}'
 ```
 
-### 4) Docker
-```
-docker build -t polyglot-faq-chat .
-docker run -p 8000:8000 --env-file .env -v $(pwd)/.chroma:/app/.chroma polyglot-faq-chat
-```
-
-### Env vars
-- GOOGLE_API_KEY
-- CHROMA_DIR (default .chroma)
-- OLLAMA_MODEL (default llama3.1:8b-instruct)
-- OLLAMA_BASE_URL (default http://127.0.0.1:11434)
-
-### Use Ollama locally
-1) Install: `brew install --cask ollama`
-2) Start app (Ollama daemon)
-3) Pull a model: `ollama pull llama3.1:8b-instruct`
-4) Run API and test as below
+### Notes
+- Chroma persists under `.chroma/`; delete it to reset the KB.
+- The React app is bundled into `app/static/` and served by FastAPI.
 
 
