@@ -11,8 +11,8 @@ Ask questions, get answers, and see a live 2D/3D map of your knowledge base (Goo
 python -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
 export GOOGLE_API_KEY="YOUR_KEY"
-export GENERATOR_MODEL="gemma-2-2b-it"  # optional; default is gemma-2-2b-it
-export CHROMA_DIR=".chroma"             # optional; default is .chroma
+export GENERATOR_MODEL="gemini-2.5-flash-lite"  
+export CHROMA_DIR=".chroma"            
 ```
 
 The app uses Google Generative AI for both embeddings and generation; no local model needed.
