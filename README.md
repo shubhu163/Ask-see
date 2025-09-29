@@ -50,4 +50,10 @@ curl -X POST http://127.0.0.1:8000/ask -H "Content-Type: application/json" -d '{
 - Chroma persists under `.chroma/`; delete it to reset the KB.
 - The React SPA is bundled into `app/static/spa/` and served by FastAPI at `/spa`.
 
+<img width="1680" height="797" alt="image" src="https://github.com/user-attachments/assets/195a6ba7-5cf7-422a-b2b2-39527f3c1c08" />
+<img width="1680" height="926" alt="image" src="https://github.com/user-attachments/assets/f70be86d-39cb-49ff-b08e-b4d1260d5d22" />
+
+
+
+
 
