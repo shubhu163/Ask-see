@@ -23,11 +23,19 @@ The app uses Google Generative AI for both embeddings and generation; no local m
 cd frontend
 npm ci
 npm run build
+
+OR
+
+make frontend
 ```
 
 ### 4) Run backend
 ```
 uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+OR
+
+make backend
 ```
 Open http://127.0.0.1:8000/spa
 
