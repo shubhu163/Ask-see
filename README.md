@@ -10,9 +10,10 @@ Ask questions, get answers, and see a live 2D/3D map of your knowledge base (Goo
 ```
 python -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
-export GOOGLE_API_KEY="YOUR_KEY"
-export GENERATOR_MODEL="gemini-2.5-flash-lite"  
-export CHROMA_DIR=".chroma"            
+Make .env file and set below variables inside it.
+ GOOGLE_API_KEY="YOUR_KEY"
+ GENERATOR_MODEL="gemini-2.5-flash-lite"  
+ CHROMA_DIR=".chroma"            
 ```
 
 The app uses Google Generative AI for both embeddings and generation; no local model needed.
@@ -22,8 +23,6 @@ The app uses Google Generative AI for both embeddings and generation; no local m
 cd frontend
 npm ci
 npm run build
-rm -rf ../app/static/spa && mkdir -p ../app/static/spa && cp -R dist/* ../app/static/spa/
-cd ..
 ```
 
 ### 4) Run backend
